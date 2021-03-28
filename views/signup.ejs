@@ -1,8 +1,11 @@
 <h1>This is signUp page</h1>
+<% if(locals.error_message){%>
+    <h6 style="color: red;"><%= error_message %> </h6>
+<% } %>
 <form action="/users/create", method="POST">
     <input type="text" placeholder="Enter name" required='true' name="name">
-    <input type="text" placeholder="Enter email" required='true' name="email">
-    <input type="text" placeholder="Enter password" required='true' name="password">
-    <input type="text" placeholder="Confirm password" required='true' name="confirm-password">
+    <input type="email" placeholder="Enter email" required='true' name="email">
+    <input type="password" placeholder="Enter password" required='true' name="password">
+    <input type="password" placeholder="Confirm password" required='true' name="confirm_password">
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

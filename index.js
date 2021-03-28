@@ -1,7 +1,8 @@
 const express=require('express');
 const expressLayouts = require('express-ejs-layouts');
 const path=require('path');
-const port=9839;
+const cookieParser = require('cookie-parser');
+const port=9834;
 const app=express();
 
 
@@ -14,6 +15,7 @@ app.set('views','./views');
 app.use(expressLayouts);
 
 app.use(express.urlencoded({extended:true})); // encoding for post request
+app.use(cookieParser());
 
 //app.use("/customCss",express.static(path.join(__dirname,"assets/css")));
 app.use(express.static('assets'));
