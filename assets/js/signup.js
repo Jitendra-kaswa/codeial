@@ -1,0 +1,1 @@
+console.log("Welcome to the Sign Up page");
