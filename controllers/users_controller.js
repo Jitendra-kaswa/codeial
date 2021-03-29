@@ -1,25 +1,26 @@
 const Users =require('../models/user'); // require database for post requests
 module.exports.profile=function(req,res){
     return res.render('profile',{
-        title:"User Profile",
-        css_link:"/css/profile.css",
-        js_link:"/js/profile.js"
+        title:"User Profile"
     });
 }
 
 module.exports.signin=function(req,res){
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
     return res.render('signin',{
-        title:'Sign In Page',
-        css_link:"/css/signin.css",
-        js_link:"/js/signin.js"
+        title:'Sign In Page'
     })
 };
 
 module.exports.signup=function(req,res){
+    if(req.isAuthenticated()){
+       return res.redirect('/users/profile');
+    }
+
     return res.render('signup',{
-        title:"Sign Up Page",
-        css_link:"/css/signup.css",
-        js_link:"/js/signup.js"
+        title:"Sign Up Page"
     })
 };
 
@@ -27,8 +28,6 @@ module.exports.create=function(req,res){
     if(req.body.password != req.body.confirm_password){ // check if password matches or not
         return res.render('signup',{
             title:"Sign Up Page",
-            css_link:"/css/signup.css",
-            js_link:"/js/signup.js",
             error_message:" *Password doesn't match palease enter carefully"
         })
     }
@@ -38,8 +37,6 @@ module.exports.create=function(req,res){
         if(user){             // user exists in the database                       
             return res.render('signup',{
                 title:"Sign Up Page",
-                css_link:"/css/signup.css",
-                js_link:"/js/signup.js",
                 error_message:" *User is already exists Please Sign Up with another account"
             })
         }
