@@ -24,6 +24,7 @@ module.exports.signup=function(req,res){
     })
 };
 
+
 module.exports.create=function(req,res){
     if(req.body.password != req.body.confirm_password){ // check if password matches or not
         return res.render('signup',{
@@ -57,5 +58,10 @@ module.exports.create=function(req,res){
 
 // sign in and create session for the user
 module.exports.create_session = function(req,res){
+    return res.redirect('/');
+}
+
+module.exports.signout=function(req,res){
+    req.logout();
     return res.redirect('/');
 }
