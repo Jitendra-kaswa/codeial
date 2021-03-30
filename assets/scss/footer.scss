@@ -1,0 +1,33 @@
+footer{
+    background-color: #0d0d0d;
+    color: #ccc;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    .container{
+        line-height: 50px;
+        // .row1{
+        //     .col{
+        //         align-items: center;
+        //         text-align: center;
+        //     }
+        // }
+    }
+    .extra{
+        line-height: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        ul{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            li{
+                list-style: none;
+                padding-left: 14px;
+                padding-right: 14px;
+
+            }
+        }
+    }
+}

@@ -13,6 +13,17 @@ const session =require('express-session');
 const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy');
 const MongoStore=require('connect-mongo')(session);
+
+// importing sass into project
+const sassMiddleWare = require('node-sass-middleware');
+app.use(sassMiddleWare({
+    src:'./assets/scss', // from where to pick
+    dest:'./assets/css', // where to put compiled files
+    debug:true, // show the error if there are some while compilation
+    outputStyle:'extended', // extended-> readable file(write in multiple lines), compressed-> non readable(write in single line)
+    prefix:'/css' // prefix for css files
+}))
+
 //set up the view engine
 app.set('view engine','ejs');
 app.set('views','./views');
