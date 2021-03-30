@@ -6,7 +6,8 @@ module.exports.create = function(req, res){
         user: req.user._id
     }, function(err, post){
         if(err){console.log('error in creating a post'); return;}
-
-        return res.redirect('back');
+        
+        console.log("New Post has been created");
+        return res.redirect('/');
     });
 }

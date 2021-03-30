@@ -1,7 +1,5 @@
 body{
     margin: 0px;
-
-    #layout-main{
-        height: 100%;
-    }
+    overflow-y: scroll;
+    z-index: 0;
 }

@@ -1,4 +1,4 @@
 body {
-  margin: 0px; }
-  body #layout-main {
-    height: 100%; }
+  margin: 0px;
+  overflow-y: scroll;
+  z-index: 0; }
