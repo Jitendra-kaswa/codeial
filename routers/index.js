@@ -6,7 +6,7 @@ router.get('/',homeController.home);
 
 router.use('/users',require('./users'));
 router.use('/posts',require('./posts'));
-
+router.use('/comments',require('./comments'));
 // for any further routs,access from here
 // router.use('/routerName',require('./routerfile'));
 module.exports=router;

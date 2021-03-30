@@ -1,21 +1,22 @@
-footer {
-  background-color: #0d0d0d;
-  color: #ccc;
-  position: fixed;
+#layout-footer {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
   bottom: 0;
-  width: 100vw; }
-  footer .container {
-    line-height: 50px; }
-  footer .extra {
-    line-height: 40px;
+  position: relative;
+  width: 100vw;
+  background: grey;
+  padding: 5px 10px; }
+  #layout-footer a {
+    color: white;
+    text-decoration: none; }
+  #layout-footer .footer-nav ul {
+    list-style: none;
     display: flex;
     justify-content: space-between;
     align-items: center; }
-    footer .extra ul {
-      display: flex;
-      justify-content: space-between;
-      align-items: center; }
-      footer .extra ul li {
-        list-style: none;
-        padding-left: 14px;
-        padding-right: 14px; }
+    #layout-footer .footer-nav ul li {
+      padding-left: 14px;
+      padding-right: 14px; }
