@@ -65,3 +65,4 @@ module.exports.signout=function(req,res){
     req.logout();
     return res.redirect('/');
 }
+

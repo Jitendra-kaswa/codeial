@@ -1,4 +1,11 @@
-<!-- <link rel="stylesheet" href="/css/home.css">
-<script src="/js/home.js"></script> -->
+<link rel="stylesheet" href="/css/home.css">
+<script src="/js/home.js"></script>
 <h1>This is Codial / <%= title %> </h1>
-<button type="button" class="btn btn-primary">Primary</button>
+
+<section id="feed-posts">
+    <h4>Posts</h4>
+    <form action="/posts" id="new-post-form" method="POST">
+        <textarea name="content" id="" cols="30" rows="3" placeholder="Type Here ..." required></textarea>
+        <button type="submit" class="btn btn-primary btn-lg">Post</button>
+    </form>
+</section>
