@@ -1,7 +1,11 @@
+const User = require('../models/user');
 const Users =require('../models/user'); // require database for post requests
 module.exports.profile=function(req,res){
-    return res.render('profile',{
-        title:"User Profile"
+    User.findById(req.params.id,(err,user)=>{
+        return res.render('profile',{
+            title:"User Profile",
+            profile_user:user
+        });
     });
 }
 
