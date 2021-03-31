@@ -1,4 +1,14 @@
-h1{
-    color: green;
-    
+#home-container{
+    display: flex;
+    #feed-posts{
+        width: 70%;
+        padding: 10px;
+        border-right: 1px solid lightgray;
+    }
+    #user-friends{
+        width: 30%;
+        padding: 10px;
+        //border-left: 1px solid lightgray;
+        height: 100%;
+    }
 }
