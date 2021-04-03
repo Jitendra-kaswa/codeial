@@ -1,13 +1,12 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-
 const User=require('../models/user');
-// authentation using passport
-passport.use(new LocalStrategy({
+
+passport.use(new LocalStrategy({ // authentation using passport
     usernameField:'email'
     },function(email,password,done){
-        // fing a user and stablish the identity
-        User.findOne({email:email},(err,user)=>{
+       
+        User.findOne({email:email},(err,user)=>{  // fing a user and stablish the identity
             if(err){ console.log('err in fingding user -->passport');
                 return done(err);
             }
@@ -20,13 +19,11 @@ passport.use(new LocalStrategy({
     }
 ));
 
-// serializing -> the user to decide which key to be kept in the cookies
-passport.serializeUser(function(user,done){
+passport.serializeUser(function(user,done){ // serializing -> the user to decide which key to be kept in the cookies
     done(null,user.id);
 });
 
-// deserialize the user from the key in the cookies
-passport.deserializeUser(function(id,done){
+passport.deserializeUser(function(id,done){ // deserialize the user from the key in the cookies
     User.findById(id,(err,user)=>{
         if(err){ console.log('err in fingding user -->passport');
             return done(err);
@@ -40,7 +37,7 @@ passport.deserializeUser(function(id,done){
 // for that we have to check authentication whether user is authorised for that data or not
 passport.checkAuthentication= function(req,res,next){
     // if the user is authenticated,then pass the request to the next function(controller's action)
-    if(req.isAuthenticated()){
+    if(req.isAuthenticated()){ // isAuthenticated is a inbuilt function 
         return next();
     }
     // if the user is not signed in

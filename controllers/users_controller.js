@@ -1,6 +1,6 @@
-const User = require('../models/user');
-const Users =require('../models/user'); // require database for post requests
-module.exports.profile=function(req,res){
+const User =require('../models/user'); // require database for post requests
+
+module.exports.profile=function(req,res){ // show user profile
     User.findById(req.params.id,(err,user)=>{
         return res.render('profile',{
             title:"User Profile",
@@ -9,7 +9,7 @@ module.exports.profile=function(req,res){
     });
 }
 
-module.exports.update = function(req, res){
+module.exports.update = function(req, res){ // update the user profile
     if(req.user.id == req.params.id){
         User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
             return res.redirect('back');
@@ -20,7 +20,7 @@ module.exports.update = function(req, res){
 }
 
 module.exports.signin=function(req,res){
-    if(req.isAuthenticated()){
+    if(req.isAuthenticated()){ // user is already logined(session created)
         return res.redirect('/users/profile');
     }
     return res.render('signin',{
@@ -29,7 +29,7 @@ module.exports.signin=function(req,res){
 };
 
 module.exports.signup=function(req,res){
-    if(req.isAuthenticated()){
+    if(req.isAuthenticated()){ // user is already logined in (session created)
        return res.redirect('/users/profile');
     }
 
@@ -38,7 +38,7 @@ module.exports.signup=function(req,res){
     })
 };
 
-
+// sign up for new users
 module.exports.create=function(req,res){
     if(req.body.password != req.body.confirm_password){ // check if password matches or not
         return res.render('signup',{
@@ -46,7 +46,7 @@ module.exports.create=function(req,res){
             error_message:" *Password doesn't match palease enter carefully"
         })
     }
-    Users.findOne({email:req.body.email},(err,user)=>{ // check if user already exists or not
+    User.findOne({email:req.body.email},(err,user)=>{ // check if user already exists or not
         if(err) {console.log("error in fingding the user");return} // ther is some error in finding the user
         
         if(user){             // user exists in the database                       
@@ -55,7 +55,7 @@ module.exports.create=function(req,res){
                 error_message:" *User is already exists Please Sign Up with another account"
             })
         }
-        Users.create({ // user doesn't exists, create the account
+        User.create({ // user doesn't exists, create the account
             name:req.body.name,
             email:req.body.email,
             password:req.body.password
@@ -76,7 +76,7 @@ module.exports.create_session = function(req,res){
 }
 
 module.exports.signout=function(req,res){
-    req.logout();
+    req.logout(); // it will destroy the session
     return res.redirect('/');
 }
 
