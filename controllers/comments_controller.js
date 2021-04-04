@@ -34,12 +34,13 @@ module.exports.create =  async function(req, res){
             });
             post.comments.push(comment);
             post.save();
-    
-            res.redirect('back');
+            
+            req.flash('success','Comment created Successfully !!')
+            return res.redirect('back');
         }
     }catch(err){
-        console.log("Error",err);
-        return ;
+        req.flash('error','Error in Publishing the comment')
+        return res.redirect('back');
     }
 }
 
@@ -67,14 +68,16 @@ module.exports.destroy= async function(req,res){
             comment.remove();
 
             Post.findByIdAndUpdate(postId,{$pull:{commetns:req.params.id}},(err,post)=>{
+                req.flash('success','Comment deleted Successfully !!')
                 return res.redirect('back');
             })
         }
         else{
+            req.flash('error','You are not authorised to delete this comment')
             return res.redirect('back');
         }
     }catch(err){
-        console.log("Error",err);
-        return ;
+        req.flash('error','Error in Publishing the comment')
+        return res.redirect('back');
     }
 }

@@ -41,7 +41,6 @@ module.exports.signup=function(req,res){
 // sign up for new users
 module.exports.create=function(req,res){
     if(req.body.password != req.body.confirm_password){ // check if password matches or not
-        req.flash('error','Password is not matching');
         return res.render('signup',{
             title:"Sign Up Page",
             // error_message:" *Password doesn't match palease enter carefully"
@@ -50,8 +49,7 @@ module.exports.create=function(req,res){
     User.findOne({email:req.body.email},(err,user)=>{ // check if user already exists or not
         if(err) {console.log("error in fingding the user");return} // ther is some error in finding the user
         
-        if(user){             // user exists in the database  
-            req.flash('error','User is already exists');                     
+        if(user){             // user exists in the database                      
             return res.render('signup',{
                 title:"Sign Up Page",
                 // error_message:" *User is already exists Please Sign Up with another account"
