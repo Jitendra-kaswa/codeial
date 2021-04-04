@@ -41,18 +41,20 @@ module.exports.signup=function(req,res){
 // sign up for new users
 module.exports.create=function(req,res){
     if(req.body.password != req.body.confirm_password){ // check if password matches or not
+        req.flash('error','Password is not matching');
         return res.render('signup',{
             title:"Sign Up Page",
-            error_message:" *Password doesn't match palease enter carefully"
+            // error_message:" *Password doesn't match palease enter carefully"
         })
     }
     User.findOne({email:req.body.email},(err,user)=>{ // check if user already exists or not
         if(err) {console.log("error in fingding the user");return} // ther is some error in finding the user
         
-        if(user){             // user exists in the database                       
+        if(user){             // user exists in the database  
+            req.flash('error','User is already exists');                     
             return res.render('signup',{
                 title:"Sign Up Page",
-                error_message:" *User is already exists Please Sign Up with another account"
+                // error_message:" *User is already exists Please Sign Up with another account"
             })
         }
         User.create({ // user doesn't exists, create the account
@@ -72,11 +74,13 @@ module.exports.create=function(req,res){
 
 // sign in and create session for the user
 module.exports.create_session = function(req,res){
+    req.flash('success','Logged in Successfully');
     return res.redirect('/');
 }
 
 module.exports.signout=function(req,res){
     req.logout(); // it will destroy the session
+    req.flash('success','You have logged out!');
     return res.redirect('/');
 }
 
