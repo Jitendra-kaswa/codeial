@@ -38,9 +38,12 @@ app.use(cookieParser());
 
 //app.use("/customCss",express.static(path.join(__dirname,"assets/css")));
 app.use(express.static('assets'));
-app.use(express.static("node_modules/bootstrap/dist/css"));
-app.use(express.static("node_modules/bootstrap/dist/js"));
-app.use(express.static("node_modules/jquery/dist"));
+// makes the upload path available
+app.use('/uploads',express.static(__dirname+'/uploads'));
+// bootstrap and jquery file
+// app.use(express.static("node_modules/bootstrap/dist/css"));
+// app.use(express.static("node_modules/bootstrap/dist/js"));
+// app.use(express.static("node_modules/jquery/dist"));
 
 //mongo-store is used to store the session cookie in the db
 app.use(session({

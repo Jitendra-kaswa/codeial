@@ -9,12 +9,37 @@ module.exports.profile=function(req,res){ // show user profile
     });
 }
 
-module.exports.update = function(req, res){ // update the user profile
+module.exports.update = async function(req, res){ // update the user profile
+    // if(req.user.id == req.params.id){
+    //     let user = await User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+    //         return res.redirect('back');
+    //     });
+    // }else{
+    //     req.flash('error','Unauthorised!');
+    //     return res.status(401).send('Unauthorized');
+    // }
     if(req.user.id == req.params.id){
-        User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
-            return res.redirect('back');
-        });
+        try{
+            let user = await User.findByIdAndUpdate(req.params.id);
+            User.uploadAvatar(req,res,function(err){
+                if(err){console.log('******Multer error:',err)};
+                user.name = req.body.name;
+                user.email = req.body.email;
+                if(req.file){
+                    // this is saving the path of the uploading file into the avatar field in the user
+                    user.avatar = User.avatarPath+'/'+req.file.filename;
+                }
+                user.save();
+                console.log(user);
+                return res.redirect('back');
+            });
+        }
+        catch(error){
+            req.flash('error',err);
+            return res.redirect('back')
+        }
     }else{
+        req.flash('error','Unauthorised!');
         return res.status(401).send('Unauthorized');
     }
 }
